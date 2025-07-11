@@ -4,38 +4,126 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Christopher Mickelson - Software Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css"/>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            transition: width 0.3s ease;
+        }
+
+            .sidebar h2 {
+                margin-bottom: 30px;
+                font-size: 24px;
+                text-align: center;
+                animation: fadeInDown 0.5s ease-in-out;
+            }
+
+        .nav-item {
+            padding: 15px 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+            .nav-item:hover {
+                background-color: #34495e;
+            }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <header>
-        <h1>Christopher Mickelson</h1>
-        <h2>Software Engineer</h2>
-        <p><a href="mailto:chrimson76@gmail.com">chrimson76@gmail.com</a> · <a href="https://github.com/DigikixUSA">GitHub</a><!--a href="https://linkedin.com/in/yourusername">LinkedIn</a></p-->
-        <br>763.442.8872</p>
-    </header>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closeButton" onclick="closeNav()">&times;</a>
-        <a href="#">Summary</a>
-        <a href="#">Skills</a>
-        <a href="#">Projects</a>
-        <a href="#">Education</a>
-        <a href="#">Work Experience</a>
+    <div class="sidebar">
+        <h3>Christopher Mickelson</h3>
+        <h4>Software Engineer</h4>
+        <div class="nav-item" onclick="showContent(1)">Home</div>
+        <div class="nav-item" onclick="showContent(2)">Skills</div>
+        <div class="nav-item" onclick="showContent(3)">Projects</div>
+        <div class="nav-item" onclick="showContent(4)">Education</div>
+        <div class="nav-item" onclick="showContent(5)">Work Experience</div>
+        <div class="nav-item" onclick="showContent(6)">About Me</div>
     </div>
 
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+    <div class="main-content" id="content">
+        <h1>Christopher Mickelson - Software Engineer</h1>
+        <p>
+            <a href="mailto:chrimson76@gmail.com">chrimson76@gmail.com</a> - <a href="https://github.com/DigikixUSA">GitHub</a><br>763.442.8872<!--a href="https://linkedin.com/in/yourusername">LinkedIn</a></p-->
 
-<script>
-    function openNav(){
-        document.getElementByID("mySidenav").style.width = "250px";
-    }
-    function closeNav(){
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+        </p>
+    </div>
 
+    <script>
+        function showContent(index) {
+            const content = document.getElementById('content');
+            const fileName = `content/content${index}.html`;
+
+            fetch(fileName)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${fileName}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    content.innerHTML = html;
+                    content.style.animation = 'none';
+                    setTimeout(() => {
+                        content.style.animation = '';
+                    }, 10);
+                })
+                .catch(error => {
+                    content.innerHTML = `<h1>Error</h1><p>${error.message} ${fileName}</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
 
 </body>
 </html>
