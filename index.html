@@ -3,80 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css">
     <title>Christopher Mickelson - Software Engineer</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: flex;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: #2c3e50;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            transition: width 0.3s ease;
-        }
-
-            .sidebar h2 {
-                margin-bottom: 30px;
-                font-size: 24px;
-                text-align: center;
-                animation: fadeInDown 0.5s ease-in-out;
-            }
-
-        .nav-item {
-            padding: 15px 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-            .nav-item:hover {
-                background-color: #34495e;
-            }
-
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="sidebar">
@@ -91,37 +19,14 @@
     </div>
 
     <div class="main-content" id="content">
-        <h1>Christopher Mickelson - Software Engineer</h1>
+        <h1>Christopher Mickelson</h1>
+        <h2>Software Engineer</h2>
         <p>
-            <a href="mailto:chrimson76@gmail.com">chrimson76@gmail.com</a> - <a href="https://github.com/DigikixUSA">GitHub</a><br>763.442.8872<!--a href="https://linkedin.com/in/yourusername">LinkedIn</a></p-->
-
+            <a href="mailto:chrimson76@gmail.com">chrimson76@gmail.com</a> - <a href="https://github.com/DigikixUSA">GitHub</a><br>763.442.8872<br><a href="https://www.linkedin.com/in/christopher-m-5b8b9820/">LinkedIn</a>
         </p>
     </div>
 
-    <script>
-        function showContent(index) {
-            const content = document.getElementById('content');
-            const fileName = `content/content${index}.html`;
-
-            fetch(fileName)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to load ${fileName}`);
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    content.innerHTML = html;
-                    content.style.animation = 'none';
-                    setTimeout(() => {
-                        content.style.animation = '';
-                    }, 10);
-                })
-                .catch(error => {
-                    content.innerHTML = `<h1>Error</h1><p>${error.message} ${fileName}</p>`;
-                });
-        }
-    </script>
+    <script src="js/scontent.js"></script>
 </body>
 </html>
 
