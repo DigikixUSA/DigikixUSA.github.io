@@ -2,14 +2,25 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
 }
 
 body {
     display: flex;
     height: 100vh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #f0f0f0;
+    background-image:url('../content/programming-background.png');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:azure;
+    text-shadow: 3px 4px 5px rgba(0,0,0,0.65);
 }
+
+a:link { color: rgb(113, 113, 250); }
+a:visited { color: rgb(150, 72, 150); }
+a:hover { color: rgb(252, 102, 102); }
+a:active { color: rgb(64, 133, 64); }
 
 .sidebar {
     width: 250px;
