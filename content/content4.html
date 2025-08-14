@@ -2,10 +2,99 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Education</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Education and Certifications</title>    
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .cert-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .cert-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+    }
+    .cert-badge {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .cert-name {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    @media (max-width: 500px) {
+      .cert-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .cert-badge {
+        margin-bottom: 8px;
+      }
+    }
+  </style>
 </head>
 <body>
+<div id="root"></div>
 
+  <!-- React & ReactDOM via CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script type="text/babel">
+    const certifications = [
+        {name: "Western Governors University, Bachelor of Science, Software Engineering (2020-2025)", badge: "wgu2.png"},
+        {name: "AWS Certified Cloud Practitioner - Foundational (Oct 2023)", badge: "aws.png" },
+        {name: "CompTIA Project+ (Feb 2024)", badge: "project.png"   },
+        {name: "C Certified Associate Programmer - CLA (June 2020) C++ Institute", badge: "cla.png"},
+        {name: "CompITA A+ (Dec 2008)", badge: "aplus.png"}
+    ];
+
+    function Certifications(){
+        return(
+            <div>
+                <h2>Education and Certifications</h2>
+                <div className="cert-list">
+                    {certifications.map((cert, index) => (
+                        <div key={index} className="cert-card">
+                            <img src={cert.badge} alt={`${cert.name} badge`} className="cert-badge" />
+                            <span className="cert-name">{cert.name}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<Certifications />);
+  </script>
+
+<!--
     <section class="content-text">
         <h2>Education</h2>
         <table style="border: none;border-collapse: collapse;width: 500px;">
@@ -37,5 +126,6 @@
             </tbody>
         </table>
     </section>
+-->
 </body>
 </html>
