@@ -17,9 +17,24 @@ body {
     text-shadow: 2px 4px 3px rgba(0,0,0,.75);
 }
 
+.content-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+.profile-img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
 .content-text{
     color:azure;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
     text-shadow: 2px 2px 2px rgba(0,0,0,1);
+    gap: 8px;
 }
 
 /* change hyperlink colors to adapt to darker background image */
