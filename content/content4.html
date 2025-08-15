@@ -72,7 +72,19 @@
 
 <!--TODO:modify so that its not re-run every time e.g. const certifications defined again-->
 <script type="text/babel">
+    (() => {
     console.log("[Certifications] JSX script loaded");
+
+    const rootElement = document.getElementById("certifications-root");
+    if (!rootElement) {
+        console.error("[Certifications] ERROR: #certifications-root not found");
+        return;
+    }
+
+    if (rootElement._reactRoot) {
+        rootElement._reactRoot.unmount();
+    }
+
     const certifications = [
         {
             name: "Western Governors University - Bachelor of Science, Software Engineering (2020-2025)",
@@ -100,20 +112,15 @@
             </div>
         );
     }
-    // Ensure render happens after insertion
-    setTimeout(() => {
-        const rootElement = document.getElementById("certifications-root");
-        if (!rootElement) {
-            console.error("[Certifications] ERROR: #certifications-root not found");
-            return;
-        }
-        try {
-            ReactDOM.createRoot(rootElement).render(<Certifications />);
-            console.log("[Certifications] Render successful");
-        } catch (err) {
-            console.error("[Certifications] Render failed", err);
-        }
-    }, 0);
+    try {
+        const root = ReactDOM.createRoot(rootElement);
+        rootElement._reactRoot = root; // store reference for later unmount
+        root.render(<Certifications />);
+        console.log("[Certifications] Render successful");
+    } catch (err) {
+        console.error("[Certifications] Render failed", err);
+    }
+    })();
 </script>
 
 
