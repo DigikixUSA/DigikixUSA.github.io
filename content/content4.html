@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Education and Certifications</title>
     <style>
         body {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background-image:url('../content/programming-background2.png');
-            background-attachment:fixed;
+            background-image: url('../content/programming-background2.png');
+            background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
             color: azure;
@@ -23,6 +23,7 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
         .cert-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -30,6 +31,7 @@
             max-width: 900px;
             margin: auto;
         }
+
         .cert-card {
             background: white;
             border: 1px solid #ddd;
@@ -41,37 +43,41 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s ease;
         }
-        .cert-card:hover {
-            transform: translateY(-4px);
-        }
+
+            .cert-card:hover {
+                transform: translateY(-4px);
+            }
+
         .cert-badge {
             width: 100px;
             height: 100px;
             object-fit: contain;
             flex-shrink: 0;
         }
+
         .cert-name {
             font-weight: bold;
             font-size: 1rem;
             color: black;
         }
-        @media (max-width: 500px){
+
+        @media (max-width: 500px) {
             .cert-card {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-            .cert-badge{
+
+            .cert-badge {
                 margin-bottom: 8px;
             }
         }
     </style>
 </head>
 <body>
-<div id="certifications-root"></div>
+    <div id="certifications-root"></div>
 
-<!--TODO:modify so that its not re-run every time e.g. const certifications defined again-->
-<script type="text/babel">
+    <script type="text/babel">
     (() => {
     console.log("[Certifications] JSX script loaded");
 
@@ -86,14 +92,16 @@
     }
 
     const certifications = [
-        {
-            name: "Western Governors University - Bachelor of Science, Software Engineering (2020-2025)",
-            badge: "content/wgu2.png"
-        },
-        {name: "AWS Certified Cloud Practitioner - Foundational (Oct 2023)", badge: "content/aws.png"},
-        {name: "CompTIA Project+ (Feb 2024)", badge: "content/project.png"},
-        {name: "C Certified Associate Programmer - CLA (June 2020)", badge: "content/cla.png"},
-        {name: "CompITA A+ (Dec 2008)", badge: "content/aplus.png"}
+        {name: "Western Governors University - Bachelor of Science, Software Engineering (2020-2025)",badge: "content/wgu2.png",
+         link: "https://www.wgu.edu"},
+        {name: "AWS Certified Cloud Practitioner - Foundational (Oct 2023)", badge: "content/aws.png",
+         link: "https://www.credly.com/badges/5e8f4ca8-d83c-4414-9e23-d19823c8234b/public_url"},
+        {name: "CompTIA Project+ (Feb 2024)", badge: "content/project.png",
+         link: "https://www.credly.com/badges/57263e36-6e26-49e3-9aef-4e3f7eb72466/public_url"},
+        {name: "C Certified Associate Programmer - CLA (June 2020)", badge: "content/cla.png",
+         link: "https://www.credly.com/badges/830fd905-082a-4ea9-a217-cb5d570fc8b0/public_url"},
+        {name: "CompITA A+ (Dec 2008)", badge: "content/aplus.png",
+         link: "https://www.credly.com/badges/5de0c26e-bf56-409e-9f69-0aadfe5d5b6a/public_url"}
     ];
 
 
@@ -103,10 +111,22 @@
                 <h2>Education and Certifications</h2>
                 <div className="cert-list">
                     {certifications.map((cert, index) => (
-                        <div key={index} className="cert-card">
-                            <img src={cert.badge} alt={`${cert.name} badge`} className="cert-badge" />
-                            <span className="cert-name">{cert.name}</span>
-                        </div>
+                        <a
+            key={index}
+            href={cert.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ textDecoration: "none", color: "inherit" }}
+        >
+            <div className="cert-card">
+                <img
+                    src={cert.badge}
+                    alt={`${cert.name} badge`}
+                    className="cert-badge"
+                />
+                <span className="cert-name">{cert.name}</span>
+            </div>
+        </a>
                     ))}
                 </div>
             </div>
@@ -121,7 +141,7 @@
         console.error("[Certifications] Render failed", err);
     }
     })();
-</script>
+    </script>
 
 
 </body>
