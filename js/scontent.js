@@ -11,6 +11,15 @@ function showContent(index) {
         })
         .then(html => {
             content.innerHTML = html;
+            // Execute scripts in loaded HTML
+            content.querySelectorAll("script").forEach(oldScript => {
+                const newScript = document.createElement("script");
+                Array.from(oldScript.attributes).forEach(attr =>
+                    newScript.setAttribute(attr.name, attr.value)
+                );
+                newScript.textContent = oldScript.textContent;
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
             content.style.animation = 'none';
             setTimeout(() => {
                 content.style.animation = '';

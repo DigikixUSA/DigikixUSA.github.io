@@ -7,6 +7,12 @@
     <title>Christopher Mickelson - Software Engineer</title>
 </head>
 <body>
+
+    <!-- React, ReactDOM, Babel (loaded once globally) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
     <div class="sidebar">
         <h3>Christopher Mickelson</h3>
         <h4>Software Engineer</h4>
@@ -26,7 +32,92 @@
         </p>
     </div>
 
-    <script src="js/scontent.js"></script>
+
+
+    <!--script type="text/babel" src="js/certifications.js"></script-->
+    <!--script src="js/scontent.js"></script-->
+    <script>
+        function showContent(index) {
+            const content = document.getElementById('content');
+            const fileName = `content/content${index}.html`;
+
+            console.log(`[showContent] Loading file: ${fileName}`);
+
+            fetch(fileName)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${fileName}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    console.log("[showContent] File loaded successfully, parsing...");
+
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = html;
+
+                    // Extract <script> tags
+                    const scripts = tempDiv.querySelectorAll("script");
+                    console.log(`[showContent] Found ${scripts.length} <script> tag(s)`);
+
+                    // Remove scripts before inserting HTML
+                    scripts.forEach(script => script.parentNode.removeChild(script));
+
+                    // Insert HTML without scripts
+                    content.innerHTML = tempDiv.innerHTML;
+
+                    // Reset animation
+                    content.style.animation = 'none';
+                    setTimeout(() => {
+                        content.style.animation = '';
+                    }, 10);
+
+                    // Execute scripts
+                    scripts.forEach((oldScript, i) => {
+                        const newScript = document.createElement("script");
+
+                        // Copy attributes
+                        Array.from(oldScript.attributes).forEach(attr => {
+                            newScript.setAttribute(attr.name, attr.value);
+                        });
+
+                        if (oldScript.src) {
+                            console.log(`  [Script ${i + 1}] External script: ${oldScript.src}`);
+                            newScript.src = oldScript.src;
+                            newScript.onload = () => console.log(`    -> Loaded: ${oldScript.src}`);
+                        } else {
+                            const code = oldScript.textContent.trim();
+                            console.log(`  [Script ${i + 1}] Inline script length: ${code.length} chars`);
+
+                            if (oldScript.type === "text/babel" && typeof Babel !== "undefined") {
+                                try {
+                                    console.log("    -> Compiling JSX with Babel...");
+                                    newScript.type = "text/javascript";
+                                    newScript.textContent = Babel.transform(code, { presets: ['react'] }).code;
+                                    console.log("    -> Babel compilation successful");
+                                } catch (err) {
+                                    console.error("    -> Babel compilation error:", err);
+                                    content.innerHTML = `<h2 style="color:red;">Babel compile error</h2><pre>${err.message}</pre>`;
+                                    return; // Skip appending script
+                                }
+                            } else {
+                                newScript.textContent = code;
+                            }
+                        }
+
+                        content.appendChild(newScript);
+                    });
+
+                    console.log("[showContent] Content load complete.");
+                })
+                .catch(error => {
+                    console.error("[showContent] ERROR:", error);
+                    content.innerHTML = `<h1>Error</h1><p>${error.message} ${fileName}</p>`;
+                });
+        }
+
+    </script>
+
 </body>
 </html>
 
