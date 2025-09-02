@@ -14,6 +14,11 @@ body {
     background-size: cover;
     color: azure;
     text-shadow: 2px 4px 3px rgba(0,0,0,.75);
+
+}
+
+ul {
+    padding-left: 40px;
 }
 
 .content-container {
