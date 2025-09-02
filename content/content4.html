@@ -14,11 +14,7 @@
             color: azure;
             text-shadow: 1px 2px 2px rgba(0,0,0,.5);
         }
-        /*body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-        }*/
+        
         h2 {
             text-align: center;
             margin-bottom: 20px;
@@ -77,6 +73,7 @@
 <body>
     <div id="certifications-root"></div>
 
+    <!--use Babel to compile jsx... as one does-->
     <script type="text/babel">
     (() => {
     console.log("[Certifications] JSX script loaded");
@@ -87,12 +84,14 @@
         return;
     }
 
+    // prevent double-mounting
     if (rootElement._reactRoot) {
         rootElement._reactRoot.unmount();
     }
 
+    //list of certifications that contain name, badge, and external link
     const certifications = [
-        {name: "Western Governors University - Bachelor of Science, Software Engineering (2020-2025)",badge: "content/wgu2.png",
+        {name: "Western Governors University - Bachelor of Science, Software Engineering (Graduated Sept 2, 2025)",badge: "content/wgu2.png",
          link: "https://www.wgu.edu"},
         {name: "AWS Certified Cloud Practitioner - Foundational (Oct 2023)", badge: "content/aws.png",
          link: "https://www.credly.com/badges/5e8f4ca8-d83c-4414-9e23-d19823c8234b/public_url"},
@@ -104,29 +103,20 @@
          link: "https://www.credly.com/badges/5de0c26e-bf56-409e-9f69-0aadfe5d5b6a/public_url"}
     ];
 
-
+    //this is where the fun begins... uses cert.name, cert.badge, cert.link mapped from list above
     function Certifications() {
         return (
             <div>
                 <h2>Education and Certifications</h2>
                 <div className="cert-list">
                     {certifications.map((cert, index) => (
-                        <a
-            key={index}
-            href={cert.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none", color: "inherit" }}
-        >
-            <div className="cert-card">
-                <img
-                    src={cert.badge}
-                    alt={`${cert.name} badge`}
-                    className="cert-badge"
-                />
-                <span className="cert-name">{cert.name}</span>
-            </div>
-        </a>
+                        <a key={index} href={cert.link} target="_blank" rel="noopener noreferrer"
+                           style={{ textDecoration: "none", color: "inherit" }}>
+                            <div className="cert-card">
+                                <img src={cert.badge} alt={`${cert.name} badge`} className="cert-badge"/>
+                                <span className="cert-name">{cert.name}</span>
+                            </div>
+                        </a>
                     ))}
                 </div>
             </div>
