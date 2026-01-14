@@ -1,147 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Education and Certifications</title>
-    <style>
-        body {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background-image: url('../content/programming-background2.png');
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: azure;
-            text-shadow: 1px 2px 2px rgba(0,0,0,.5);
-        }
-        
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .cert-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 16px;
-            max-width: 900px;
-            margin: auto;
-        }
-
-        .cert-card {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease;
-        }
-
-            .cert-card:hover {
-                transform: translateY(-4px);
-            }
-
-        .cert-badge {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .cert-name {
-            font-weight: bold;
-            font-size: 1rem;
-            color: black;
-        }
-
-        @media (max-width: 500px) {
-            .cert-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .cert-badge {
-                margin-bottom: 8px;
-            }
-        }
-    </style>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8ZN7PQ76Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L8ZN7PQ76Z');
-</script>
-<body>
+<section class="content-text edu-page">
+    <h2>Education & Certifications</h2>
     <div id="certifications-root"></div>
+</section>
 
-    <!--use Babel to compile jsx... as one does-->
-    <script type="text/babel">
+<style>
+    /* Scoped styles */
+    .edu-page {
+        max-width: 980px;
+        margin: 0 auto;
+    }
+
+    .edu-page h2 {
+        text-align: center;
+        margin: 8px 0 18px;
+    }
+
+    .edu-page .cert-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 14px;
+    }
+
+    .edu-page .cert-card {
+        background: #ffffff;
+        border: 1px solid #e6e6e6;
+        border-radius: 12px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .edu-page .cert-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .edu-page .cert-badge {
+        width: 72px;
+        height: 72px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .edu-page .cert-name {
+        font-weight: 600;
+        font-size: 0.98rem;
+        color: #111;
+        line-height: 1.25;
+    }
+
+    .edu-page a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    @media (max-width: 520px) {
+        .edu-page .cert-card {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+</style>
+
+<script type="text/babel">
     (() => {
-    console.log("[Certifications] JSX script loaded");
+        const rootElement = document.getElementById("certifications-root");
+        if (!rootElement) return;
 
-    const rootElement = document.getElementById("certifications-root");
-    if (!rootElement) {
-        console.error("[Certifications] ERROR: #certifications-root not found");
-        return;
-    }
+        /* prevent double-mounting */
+        if (rootElement._reactRoot) {
+            rootElement._reactRoot.unmount();
+        }
 
-    // prevent double-mounting
-    if (rootElement._reactRoot) {
-        rootElement._reactRoot.unmount();
-    }
+        const items = [
+            {
+                name: "B.S. Software Engineering – Western Governors University (Sept 2025)",
+                badge: "content/wgu2.png",
+                link: "https://www.wgu.edu"
+            },
+            {
+                name: "AWS Certified Cloud Practitioner (Oct 2023)",
+                badge: "content/aws.png",
+                link: "https://www.credly.com/badges/5e8f4ca8-d83c-4414-9e23-d19823c8234b/public_url"
+            },
+            {
+                name: "CompTIA Project+ (Feb 2024)",
+                badge: "content/project.png",
+                link: "https://www.credly.com/badges/57263e36-6e26-49e3-9aef-4e3f7eb72466/public_url"
+            },
+            {
+                name: "C Certified Associate Programmer (CLA) (June 2020)",
+                badge: "content/cla.png",
+                link: "https://www.credly.com/badges/830fd905-082a-4ea9-a217-cb5d570fc8b0/public_url"
+            },
+            {
+                name: "CompTIA A+ (Dec 2008)",
+                badge: "content/aplus.png",
+                link: "https://www.credly.com/badges/5de0c26e-bf56-409e-9f69-0aadfe5d5b6a/public_url"
+            }
+        ];
 
-    //list of certifications that contain name, badge, and external link
-    const certifications = [
-        {name: "Western Governors University - Bachelor of Science, Software Engineering (Graduated Sept 2, 2025)",badge: "content/wgu2.png",
-         link: "https://www.wgu.edu"},
-        {name: "AWS Certified Cloud Practitioner - Foundational (Oct 2023)", badge: "content/aws.png",
-         link: "https://www.credly.com/badges/5e8f4ca8-d83c-4414-9e23-d19823c8234b/public_url"},
-        {name: "CompTIA Project+ (Feb 2024)", badge: "content/project.png",
-         link: "https://www.credly.com/badges/57263e36-6e26-49e3-9aef-4e3f7eb72466/public_url"},
-        {name: "C Certified Associate Programmer - CLA (June 2020)", badge: "content/cla.png",
-         link: "https://www.credly.com/badges/830fd905-082a-4ea9-a217-cb5d570fc8b0/public_url"},
-        {name: "CompITA A+ (Dec 2008)", badge: "content/aplus.png",
-         link: "https://www.credly.com/badges/5de0c26e-bf56-409e-9f69-0aadfe5d5b6a/public_url"}
-    ];
-
-    //this is where the fun begins... uses cert.name, cert.badge, cert.link mapped from list above
-    function Certifications() {
-        return (
-            <div>
-                <h2>Education and Certifications</h2>
+        function EducationCerts() {
+            return (
                 <div className="cert-list">
-                    {certifications.map((cert, index) => (
-                        <a key={index} href={cert.link} target="_blank" rel="noopener noreferrer"
-                           style={{ textDecoration: "none", color: "inherit" }}>
+                    {items.map((item, idx) => (
+                        <a key={idx} href={item.link} target="_blank" rel="noopener noreferrer">
                             <div className="cert-card">
-                                <img src={cert.badge} alt={`${cert.name} badge`} className="cert-badge"/>
-                                <span className="cert-name">{cert.name}</span>
+                                <img className="cert-badge" src={item.badge} alt="" />
+                                <div className="cert-name">{item.name}</div>
                             </div>
                         </a>
                     ))}
                 </div>
-            </div>
-        );
-    }
-    try {
+            );
+        }
+
         const root = ReactDOM.createRoot(rootElement);
-        rootElement._reactRoot = root; // store reference for later unmount
-        root.render(<Certifications />);
-        console.log("[Certifications] Render successful");
-    } catch (err) {
-        console.error("[Certifications] Render failed", err);
-    }
+        rootElement._reactRoot = root;
+        root.render(<EducationCerts />);
     })();
-    </script>
-
-
-</body>
-</html>
+</script>
