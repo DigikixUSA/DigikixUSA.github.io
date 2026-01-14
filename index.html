@@ -4,116 +4,161 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css">
-    <title>Christopher Mickelson - Software Engineer</title>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8ZN7PQ76Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <title>Christopher Mickelson - Junior Software Engineer</title>
 
-  gtag('config', 'G-L8ZN7PQ76Z');
-</script>
-<body>
-
-    <!-- React, ReactDOM, Babel (loaded once globally) -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-    <div class="sidebar">
-        <h3>Christopher Mickelson</h3>
-        <h4>Software Engineer</h4>
-        <div class="nav-item" onclick="showContent(1)">Home</div>
-        <div class="nav-item" onclick="showContent(2)">Skills</div>
-        <div class="nav-item" onclick="showContent(3)">Projects</div>
-        <div class="nav-item" onclick="showContent(4)">Education</div>
-        <div class="nav-item" onclick="showContent(5)">Work Experience</div>
-        <div class="nav-item" onclick="showContent(6)">About Me</div>
-        <div class="nav-item"><a href="content/cmick_resume-26.pdf" download class="download-btn">Download single-page PDF resume</a></div>
-    </div>
-
-    <div class="main-content" id="content">
-        <h1>Christopher Mickelson</h1>
-        <h2>Software Engineer</h2>
-        <p>
-            <a href="mailto:chrimson76@gmail.com">chrimson76@gmail.com</a> - <a href="https://github.com/DigikixUSA">GitHub</a><br>763.442.8872<br><a href="https://www.linkedin.com/in/christopher-m-5b8b9820/">LinkedIn</a>
-        </p>
-    </div>
-    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8ZN7PQ76Z"></script>
     <script>
-        function showContent(index) {
-            const content = document.getElementById('content');
-            const fileName = `content/content${index}.html`;
-
-            fetch(fileName)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Failed to load ${fileName}`);
-                    }
-                    return response.text();
-                })
-                .then(html => {
-                    const tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = html;
-
-                    // Extract <script> tags
-                    const scripts = tempDiv.querySelectorAll("script");
-
-                    // Remove scripts before inserting HTML
-                    scripts.forEach(script => script.parentNode.removeChild(script));
-
-                    // Insert HTML without scripts
-                    content.innerHTML = tempDiv.innerHTML;
-
-                    // Reset animation
-                    content.style.animation = 'none';
-                    setTimeout(() => {
-                        content.style.animation = '';
-                    }, 10);
-
-                    // Execute scripts
-                    scripts.forEach((oldScript, i) => {
-                        const newScript = document.createElement("script");
-
-                        // Copy attributes
-                        Array.from(oldScript.attributes).forEach(attr => {
-                            newScript.setAttribute(attr.name, attr.value);
-                        });
-
-                        if (oldScript.src) {
-                            newScript.src = oldScript.src;
-                            newScript.onload = () => console.log(`    -> Loaded: ${oldScript.src}`);
-                        } else {
-                            const code = oldScript.textContent.trim();
-                            
-                            if (oldScript.type === "text/babel" && typeof Babel !== "undefined") {
-                                try {
-                                    newScript.type = "text/javascript";
-                                    newScript.textContent = Babel.transform(code, { presets: ['react'] }).code;
-                                } catch (err) {
-                                    content.innerHTML = `<h2 style="color:red;">Babel compile error</h2><pre>${err.message}</pre>`;
-                                    return; // Skip appending script
-                                }
-                            } else {
-                                newScript.textContent = code;
-                            }
-                        }
-
-                        content.appendChild(newScript);
-                    });
-
-                })
-                .catch(error => {
-                    content.innerHTML = `<h1>Error</h1><p>${error.message} ${fileName}</p>`;
-                });
-        }
-
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L8ZN7PQ76Z');
     </script>
 
-</body>
-</html>
+    <!-- React / ReactDOM (production builds) -->
+    <script defer src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel (only needed to execute text/babel scripts at runtime) -->
+    <script defer src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+<div class="sidebar">
+    <h3>Christopher Mickelson</h3>
+    <h4>Junior Software Engineer</h4>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">
+        Menu
+    </button>
+
+    <nav id="nav" class="nav" aria-label="Primary navigation">
+        <div class="nav-item" data-index="1">Home</div>
+        <div class="nav-item" data-index="2">Skills</div>
+        <div class="nav-item" data-index="3">Projects</div>
+        <div class="nav-item" data-index="4">Education</div>
+        <div class="nav-item" data-index="5">Work Experience</div>
+        <div class="nav-item" data-index="6">About Me</div>
+
+        <div class="nav-item">
+            <a href="content/cmick_resume.pdf" class="download-btn">Download single-page PDF resume</a>
+        </div>
+    </nav>
+</div>
+
+
+<main class="main-content" id="content">
+    <h1>Christopher Mickelson</h1>
+    <h2>Junior Software Engineer</h2>
+    <p>
+        <a href="mailto:chrimson76@gmail.com">chrimson76@gmail.com</a> -
+        <a href="https://github.com/DigikixUSA" target="_blank" rel="noopener noreferrer">GitHub</a><br>
+        763.442.8872<br>
+        <a href="https://www.linkedin.com/in/christopher-m-5b8b9820/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </p>
+</main>
+
+<script>
+    let currentRequestId = 0;
+
+    function setActiveNav(index) {
+        document.querySelectorAll('.nav-item[data-index]').forEach(el => {
+            el.classList.toggle('active', el.getAttribute('data-index') === String(index));
+        });
+    }
+
+    function showContent(index) {
+        const requestId = ++currentRequestId;
+        const content = document.getElementById('content');
+        const fileName = `content/content${index}.html`;
+
+        // set active nav immediately
+        setActiveNav(index);
+
+        // show loading state immediately
+        content.innerHTML = `<p class="loading">Loading…</p>`;
+
+        fetch(fileName)
+            .then(response => {
+                if (!response.ok) throw new Error(`Failed to load ${fileName}`);
+                return response.text();
+            })
+            .then(html => {
+                if (requestId !== currentRequestId) return;
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+
+                const scripts = tempDiv.querySelectorAll('script');
+                scripts.forEach(script => script.parentNode.removeChild(script));
+
+                content.innerHTML = tempDiv.innerHTML;
+
+                content.style.animation = 'none';
+                setTimeout(() => { content.style.animation = ''; }, 10);
+
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+
+                    Array.from(oldScript.attributes).forEach(attr => {
+                        newScript.setAttribute(attr.name, attr.value);
+                    });
+
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        const code = oldScript.textContent.trim();
+
+                        if (oldScript.type === 'text/babel' && typeof Babel !== 'undefined') {
+                            try {
+                                newScript.type = 'text/javascript';
+                                newScript.textContent = Babel.transform(code, { presets: ['react'] }).code;
+                            } catch (err) {
+                                content.innerHTML = `<h2 style="color:red;">Babel compile error</h2><pre>${err.message}</pre>`;
+                                return;
+                            }
+                        } else {
+                            newScript.textContent = code;
+                        }
+                    }
+
+                    content.appendChild(newScript);
+                });
+            })
+            .catch(error => {
+                if (requestId !== currentRequestId) return;
+                content.innerHTML = `<h1>Error</h1><p>${error.message}</p>`;
+            });
+    }
+
+    document.querySelectorAll('.nav-item[data-index]').forEach(el => {
+        el.addEventListener('click', () => {
+            const idx = el.getAttribute('data-index');
+            showContent(idx);
+        });
+    });
+
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('nav');
+
+    if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        nav.addEventListener('click', (e) => {
+            const item = e.target.closest('.nav-item[data-index]');
+            if (item) {
+                nav.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    showContent(1);
+</script>
+
 
 </body>
 </html>
